@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Message } from "./Message";
+import { StreamInfo } from "./StreamInfo";
 
 interface MessageType {
   id: number;
@@ -22,7 +23,6 @@ export const ChatWidget = () => {
       const data = await response.json();
       setMessages(data.messages);
       
-      // Прокрутка к последнему сообщению
       setTimeout(() => {
         if (chatRef.current) {
           chatRef.current.scrollTop = chatRef.current.scrollHeight;
@@ -35,21 +35,17 @@ export const ChatWidget = () => {
 
   useEffect(() => {
     fetchMessages();
-    
-    // Обновление каждые 5 секунд
     const interval = setInterval(fetchMessages, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto h-[600px] bg-white rounded-xl shadow-lg">
-      <div className="p-4 border-b">
-        <h2 className="text-lg font-semibold text-gray-800">Чат</h2>
-      </div>
-      
+    <div className="flex flex-col w-full max-w-md mx-auto h-[600px] bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+      <StreamInfo />
       <div 
         ref={chatRef}
         className="flex-1 overflow-y-auto p-2 space-y-2 scroll-smooth"
+        style={{ scrollbarWidth: 'thin' }}
       >
         {messages.map((message) => (
           <Message

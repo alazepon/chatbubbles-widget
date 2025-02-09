@@ -17,19 +17,19 @@ export const Message = ({ user, text, timestamp }: MessageProps) => {
         <img
           src={user.avatar}
           alt={user.name}
-          className="w-10 h-10 rounded-full object-cover shadow-sm"
+          className="w-10 h-10 rounded-full object-cover border border-purple-500/30"
           loading="lazy"
         />
       </div>
       <div className="flex-1">
         <div className="flex flex-col">
-          <span className="font-semibold text-sm text-chat-name">
+          <span className="font-semibold text-sm text-purple-100">
             {user.name}
           </span>
-          <div className="mt-1 bg-chat-bubble rounded-2xl p-3 inline-block max-w-[80%]">
-            <p className="text-chat-text text-sm leading-relaxed">{text}</p>
+          <div className="mt-1 bg-gray-800/50 rounded-2xl p-3 inline-block max-w-[80%]">
+            <p className="text-gray-100 text-sm leading-relaxed">{text}</p>
           </div>
-          <span className="text-xs text-gray-400 mt-1">
+          <span className="text-xs text-gray-500 mt-1">
             {new Date(timestamp).toLocaleTimeString([], { 
               hour: '2-digit', 
               minute: '2-digit' 
