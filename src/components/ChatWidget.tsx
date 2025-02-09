@@ -40,21 +40,28 @@ export const ChatWidget = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto h-[600px] bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+    <div className="flex flex-col gap-4 w-full max-w-md mx-auto">
+      {/* Отдельный блок для информации о стримере */}
       <StreamInfo />
-      <div 
-        ref={chatRef}
-        className="flex-1 overflow-y-auto p-2 space-y-2 scroll-smooth"
-        style={{ scrollbarWidth: 'thin' }}
-      >
-        {messages.map((message) => (
-          <Message
-            key={message.id}
-            user={message.user}
-            text={message.text}
-            timestamp={message.timestamp}
-          />
-        ))}
+      
+      {/* Отдельный блок для чата */}
+      <div className="flex flex-col h-[500px] bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+        <div 
+          ref={chatRef}
+          className="flex-1 overflow-y-auto scroll-smooth flex flex-col justify-end"
+          style={{ scrollbarWidth: 'thin' }}
+        >
+          <div className="p-2 space-y-2">
+            {messages.map((message) => (
+              <Message
+                key={message.id}
+                user={message.user}
+                text={message.text}
+                timestamp={message.timestamp}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
